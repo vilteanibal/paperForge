@@ -13,12 +13,12 @@ import { DiagnosticsPanel } from '@/components/diagnostics/DiagnosticsPanel';
 import { router } from '@inertiajs/react';
 import {
     ArrowLeft,
-    Save,
-    Play,
-    CheckCircle2,
-    AlertCircle,
+    CheckCircle,
     Cpu,
-} from 'lucide-react';
+    FloppyDisk,
+    Play,
+    WarningCircle,
+} from '@phosphor-icons/react';
 
 interface ProjectData {
     id: string;
@@ -241,11 +241,11 @@ export default function EditorShow({ project: projectProp, tree: initialTree }: 
                     <div className="flex items-center gap-2 pl-2">
                         {isDirty ? (
                             <span className="inline-flex items-center gap-1 text-[11px] text-amber-500 font-medium">
-                                <AlertCircle className="h-3 w-3" /> Unsaved
+                                <WarningCircle weight="duotone" className="h-3 w-3" /> Unsaved
                             </span>
                         ) : (
                             <span className="inline-flex items-center gap-1 text-[11px] text-emerald-500 font-medium">
-                                <CheckCircle2 className="h-3 w-3" /> Saved
+                                <CheckCircle weight="duotone" className="h-3 w-3" /> Saved
                             </span>
                         )}
                     </div>
@@ -259,7 +259,7 @@ export default function EditorShow({ project: projectProp, tree: initialTree }: 
                 {/* Right: Actions */}
                 <div className="flex items-center gap-2.5">
                     <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground font-semibold flex items-center gap-1">
-                        <Cpu className="h-3 w-3" />
+                        <Cpu weight="duotone" className="h-3 w-3" />
                         {project.setting?.compiler_engine || 'pdflatex'}
                     </span>
 
@@ -270,7 +270,7 @@ export default function EditorShow({ project: projectProp, tree: initialTree }: 
                         className="inline-flex items-center gap-1.5 rounded-lg border bg-background px-3 py-1.5 text-xs font-medium hover:bg-muted transition-colors cursor-pointer"
                         title="Ctrl+S / Cmd+S"
                     >
-                        <Save className="h-3.5 w-3.5" />
+                        <FloppyDisk className="h-3.5 w-3.5" />
                         {isSaving ? 'Saving...' : 'Save'}
                     </button>
 
@@ -281,7 +281,7 @@ export default function EditorShow({ project: projectProp, tree: initialTree }: 
                         className="inline-flex items-center gap-1.5 rounded-lg bg-primary text-primary-foreground px-3.5 py-1.5 text-xs font-semibold shadow-xs hover:bg-primary/90 disabled:opacity-50 transition-colors cursor-pointer"
                         title="Ctrl+Enter / Cmd+Enter"
                     >
-                        <Play className={`h-3.5 w-3.5 fill-current ${isCompiling ? 'animate-spin' : ''}`} />
+                        <Play weight="fill" className={`h-3.5 w-3.5 ${isCompiling ? 'animate-spin' : ''}`} />
                         {isCompiling ? 'Compiling...' : 'Compile'}
                     </button>
                 </div>

@@ -21,7 +21,7 @@ afterEach(function () {
 test('index renders dashboard with projects', function () {
     $project = Project::factory()->create(['name' => 'Research Paper']);
 
-    $response = $this->get(route('home'));
+    $response = $this->get(route('projects.index'));
 
     $response->assertOk()
         ->assertInertia(fn (Assert $page) => $page

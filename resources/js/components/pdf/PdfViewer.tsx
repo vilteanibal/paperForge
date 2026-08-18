@@ -4,7 +4,7 @@ import { PdfToolbar } from './PdfToolbar';
 import { PdfHighlightOverlay } from './PdfHighlightOverlay';
 import { transformDomToPdfPoints } from '@/hooks/useSyncTeX';
 import type { HighlightRect } from '@/types/synctex';
-import { FileText, Loader2, AlertCircle } from 'lucide-react';
+import { CircleNotch, FileText, WarningCircle } from '@phosphor-icons/react';
 
 // Configure local static PDF.js worker (Zero CDN dependency, 100% Offline)
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
@@ -228,20 +228,20 @@ export const PdfViewer: React.FC<PdfViewerProps> = ({
             >
                 {isLoading && (
                     <div className="absolute inset-0 bg-background/70 backdrop-blur-xs flex flex-col items-center justify-center z-20 gap-2 text-primary">
-                        <Loader2 className="h-8 w-8 animate-spin" />
+                        <CircleNotch className="h-8 w-8 animate-spin" />
                         <span className="text-xs font-medium text-foreground">Compiling PDF document...</span>
                     </div>
                 )}
 
                 {error ? (
                     <div className="text-center p-6 bg-destructive/10 border border-destructive/20 rounded-lg max-w-sm">
-                        <AlertCircle className="h-8 w-8 text-destructive mx-auto mb-2" />
+                        <WarningCircle weight="duotone" className="h-8 w-8 text-destructive mx-auto mb-2" />
                         <p className="text-sm font-semibold text-destructive">PDF Render Error</p>
                         <p className="text-xs text-muted-foreground mt-1">{error}</p>
                     </div>
                 ) : !pdfUrl ? (
                     <div className="text-center p-6 text-muted-foreground">
-                        <FileText className="h-12 w-12 mx-auto mb-3 opacity-40" />
+                        <FileText weight="duotone" className="h-12 w-12 mx-auto mb-3 opacity-40" />
                         <p className="text-sm font-medium">No PDF compiled yet</p>
                         <p className="text-xs text-muted-foreground/80 mt-1">
                             Click <strong className="text-foreground">Recompile</strong> to build the preview.

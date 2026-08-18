@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import type { LaTeXDiagnostic } from '@/types/compiler';
 import { DiagnosticItem } from './DiagnosticItem';
-import { Terminal, ChevronUp, ChevronDown, CheckCircle2 } from 'lucide-react';
+import {
+    CaretDown,
+    CaretUp,
+    CheckCircle,
+    TerminalWindow,
+} from '@phosphor-icons/react';
 
 export interface DiagnosticsPanelProps {
     diagnostics: LaTeXDiagnostic[];
@@ -43,9 +48,9 @@ export const DiagnosticsPanel: React.FC<DiagnosticsPanelProps> = ({
                         onClick={onToggle}
                         className="flex items-center gap-1.5 font-semibold text-foreground hover:text-primary transition-colors"
                     >
-                        <Terminal className="h-3.5 w-3.5" />
+                        <TerminalWindow className="h-3.5 w-3.5" />
                         Diagnostics & Output
-                        {isOpen ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronUp className="h-3.5 w-3.5" />}
+                        {isOpen ? <CaretDown className="h-3.5 w-3.5" /> : <CaretUp className="h-3.5 w-3.5" />}
                     </button>
 
                     <div className="flex items-center gap-2 text-[11px] font-mono">
@@ -101,7 +106,7 @@ export const DiagnosticsPanel: React.FC<DiagnosticsPanelProps> = ({
                         </pre>
                     ) : filteredDiagnostics.length === 0 ? (
                         <div className="flex items-center justify-center h-full text-muted-foreground gap-2 text-xs">
-                            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                            <CheckCircle weight="duotone" className="h-4 w-4 text-emerald-500" />
                             <span>No {filter !== 'all' ? filter : ''} issues detected.</span>
                         </div>
                     ) : (

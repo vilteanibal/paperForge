@@ -1,11 +1,11 @@
 {
     "schema_version": 1,
-    "commit": "",
-    "indexed_at": "2026-08-18T10:48:59Z",
+    "commit": "a71abe559c54717437ecb095bdea5905f673275b",
+    "indexed_at": "2026-08-18T16:15:30Z",
     "project": "home-hannibal-desarrollo-laravel-paperForge",
-    "nodes": 6054,
-    "edges": 21304,
-    "original_size": 20447232,
-    "compressed_size": 3357691,
+    "nodes": 2873,
+    "edges": 4037,
+    "original_size": 7667712,
+    "compressed_size": 1136848,
     "compression_level": 3
 }

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { router } from '@inertiajs/react';
 import {
-    FileText,
-    Plus,
-    Search,
-    Trash2,
+    ArrowSquareOut,
+    BookOpen,
     Clock,
     Cpu,
-    ExternalLink,
-    BookOpen,
-    FolderKanban,
-    Sparkles,
-} from 'lucide-react';
+    FileText,
+    Folders,
+    MagnifyingGlass,
+    Plus,
+    Sparkle,
+    Trash,
+} from '@phosphor-icons/react';
 
 interface ProjectSettingData {
     compiler_engine: string;
@@ -133,13 +133,13 @@ export default function DashboardIndex({ projects }: Props) {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <FolderKanban className="h-4 w-4 text-primary" />
+                            <Folders className="h-4 w-4 text-primary" />
                             <span>Total Projects: <strong className="text-foreground">{projectList.length}</strong></span>
                         </div>
                     </div>
 
                     <div className="relative w-full md:w-80">
-                        <Search className="h-4 w-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+                        <MagnifyingGlass className="h-4 w-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
                         <input
                             type="text"
                             value={searchQuery}
@@ -153,7 +153,7 @@ export default function DashboardIndex({ projects }: Props) {
                 {/* Projects Grid */}
                 {filteredProjects.length === 0 ? (
                     <div className="text-center py-20 bg-card/40 border border-dashed rounded-2xl p-8 max-w-lg mx-auto">
-                        <BookOpen className="h-12 w-12 text-muted-foreground/40 mx-auto mb-4" />
+                        <BookOpen weight="duotone" className="h-12 w-12 text-muted-foreground/40 mx-auto mb-4" />
                         <h3 className="text-base font-semibold text-foreground">No projects found</h3>
                         <p className="text-xs text-muted-foreground mt-1 max-w-xs mx-auto">
                             {searchQuery ? 'No projects match your search query.' : 'Create your first local LaTeX document to get started.'}
@@ -180,12 +180,12 @@ export default function DashboardIndex({ projects }: Props) {
                                 <div>
                                     <div className="flex items-start justify-between gap-3 mb-3">
                                         <div className="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                                            <FileText className="h-5 w-5" />
+                                            <FileText weight="duotone" className="h-5 w-5" />
                                         </div>
 
                                         <div className="flex items-center gap-1.5">
                                             <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground font-semibold flex items-center gap-1">
-                                                <Cpu className="h-3 w-3" />
+                                                <Cpu weight="duotone" className="h-3 w-3" />
                                                 {project.setting?.compiler_engine || 'pdflatex'}
                                             </span>
 
@@ -195,7 +195,7 @@ export default function DashboardIndex({ projects }: Props) {
                                                 className="opacity-0 group-hover:opacity-100 p-1.5 rounded-md hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-all"
                                                 title="Delete Project"
                                             >
-                                                <Trash2 className="h-4 w-4" />
+                                                <Trash className="h-4 w-4" />
                                             </button>
                                         </div>
                                     </div>
@@ -210,12 +210,12 @@ export default function DashboardIndex({ projects }: Props) {
 
                                 <div className="mt-5 pt-3 border-t flex items-center justify-between text-[11px] text-muted-foreground">
                                     <span className="flex items-center gap-1">
-                                        <Clock className="h-3 w-3" />
+                                        <Clock weight="duotone" className="h-3 w-3" />
                                         {formatDate(project.last_opened_at || project.updated_at)}
                                     </span>
 
                                     <span className="inline-flex items-center gap-1 text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                        Open <ExternalLink className="h-3 w-3" />
+                                        Open <ArrowSquareOut className="h-3 w-3" />
                                     </span>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@ export default function DashboardIndex({ projects }: Props) {
                     <div className="bg-card border rounded-2xl shadow-xl w-full max-w-md p-6 relative">
                         <div className="flex items-center gap-2.5 mb-5">
                             <div className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-                                <Sparkles className="h-4 w-4" />
+                                <Sparkle weight="duotone" className="h-4 w-4" />
                             </div>
                             <div>
                                 <h3 className="font-bold text-base">New LaTeX Project</h3>

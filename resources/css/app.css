@@ -1,5 +1,27 @@
-@import 'tailwindcss';
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Paperforge – Application Stylesheet
+ * Brand Identity System: "The Academic Craftsman"
+ *
+ * Typography hierarchy:
+ *   Headings / Brand  → Instrument Serif  (self-hosted via @fontsource)
+ *   UI / Body / Forms → DM Sans           (self-hosted via @fontsource)
+ *   Code / Mono       → JetBrains Mono   (self-hosted via @fontsource)
+ *
+ * Token strategy:
+ *   The ShadCN CSS variable names (--background, --primary, etc.) are kept
+ *   intact so that all Radix/ShadCN components re-skin automatically.
+ *   Their values are replaced with Paperforge hex values from brand_identity_system.md.
+ *   Additional Paperforge-exclusive tokens are added as new custom properties.
+ * ──────────────────────────────────────────────────────────────────────────── */
 
+/* Self-hosted fonts via @fontsource (zero CDN round-trips) */
+@import '@fontsource/instrument-serif';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/600.css';
+@import '@fontsource/dm-sans/700.css';
+
+@import 'tailwindcss';
 @import 'tw-animate-css';
 
 @source '../views';
@@ -8,15 +30,23 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+    /* ── Typography ─────────────────────────────────────────────────────── */
     --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'DM Sans', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
+    --font-serif:
+        'Instrument Serif', ui-serif, Georgia, 'Times New Roman', serif;
+    --font-mono:
+        'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro',
+        Menlo, Monaco, Consolas, monospace;
 
+    /* ── Radius ─────────────────────────────────────────────────────────── */
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
 
+    /* ── ShadCN token bridge (Tailwind utility classes) ─────────────────── */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
@@ -59,77 +89,165 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    /* ── Paperforge exclusive color tokens ──────────────────────────────── */
+    --color-paperforge-paper: var(--paper);
+    --color-paperforge-ink: var(--ui-ink);
+    --color-paperforge-muted: var(--ui-muted);
+    --color-paperforge-surface: var(--ui-surface);
+    --color-paperforge-surface-soft: var(--ui-surface-soft);
+    --color-paperforge-bg: var(--ui-bg);
+    --color-paperforge-border: var(--ui-border);
+    --color-paperforge-accent: var(--ui-accent);
+    --color-paperforge-accent-deep: var(--ui-accent-deep);
+    --color-paperforge-accent-soft: var(--ui-accent-soft);
+    --color-paperforge-rail: var(--ui-rail);
+    --color-paperforge-rail-soft: var(--ui-rail-soft);
+    --color-paperforge-rail-text: var(--ui-rail-text);
+    --color-paperforge-rail-muted: var(--ui-rail-muted);
+    --color-paperforge-green: var(--ui-green);
+    --color-paperforge-green-soft: var(--ui-green-soft);
+    --color-paperforge-amber: var(--ui-amber);
+    --color-paperforge-amber-soft: var(--ui-amber-soft);
+    --color-paperforge-red: var(--ui-red);
+    --color-paperforge-red-soft: var(--ui-red-soft);
+
+    /* ── Paperforge custom shadows ──────────────────────────────────────── */
+    --shadow-paper: 0 18px 46px rgba(58, 50, 43, 0.13), 0 2px 6px rgba(58, 50, 43, 0.08);
+    --shadow-modal: 0 24px 65px rgba(36, 31, 27, 0.25);
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+ * LIGHT MODE — Paperforge Brand Identity System
+ * Source: brand_identity_system.md
+ * ShadCN tokens remapped to Paperforge hex values (bridge strategy from design.md D1)
+ * ──────────────────────────────────────────────────────────────────────────── */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.87 0 0);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.87 0 0);
+    /* ── ShadCN token bridge (light) ────────────────────────────────────── */
+    --background: #efedeb;       /* --ui-bg: warm parchment surface */
+    --foreground: #322f2c;       /* --ui-ink: espresso ink */
+    --card: #f8f6f3;             /* --ui-surface: elevated card */
+    --card-foreground: #322f2c;
+    --popover: #f8f6f3;
+    --popover-foreground: #322f2c;
+    --primary: #bb6d4c;          /* --ui-accent-deep: terracotta deep */
+    --primary-foreground: #fffaf6;
+    --secondary: #f3f0ed;        /* --ui-surface-soft */
+    --secondary-foreground: #322f2c;
+    --muted: #f3f0ed;
+    --muted-foreground: #827c76; /* --ui-muted */
+    --accent: #f3e1d8;           /* --ui-accent-soft: terracotta blush */
+    --accent-foreground: #322f2c;
+    --destructive: #b95e48;      /* --ui-red */
+    --destructive-foreground: #fffaf6;
+    --border: #d7d2cc;           /* --ui-border */
+    --input: #d7d2cc;
+    --ring: #d88f6d;             /* --ui-accent: terracotta */
+    --radius: 0.3125rem;         /* 5px — brand spec rounded corner */
+
+    /* Chart tokens — warm editorial palette */
+    --chart-1: #d88f6d;          /* terracotta accent */
+    --chart-2: #7a9e8e;          /* sage */
+    --chart-3: #c4a882;          /* warm tan */
+    --chart-4: #b5956a;          /* amber sand */
+    --chart-5: #9e7a65;          /* brown */
+
+    /* Sidebar — maps to rail */
+    --sidebar: #3f3d3b;          /* --ui-rail: espresso dark */
+    --sidebar-foreground: #e8e2dc; /* --ui-rail-text */
+    --sidebar-primary: #d88f6d;  /* --ui-accent */
+    --sidebar-primary-foreground: #fffaf6;
+    --sidebar-accent: #4e4b48;   /* --ui-rail-soft */
+    --sidebar-accent-foreground: #e8e2dc;
+    --sidebar-border: #524f4c;
+    --sidebar-ring: #d88f6d;
+
+    /* ── Paperforge exclusive tokens (light) ────────────────────────────── */
+    --paper: #fffefa;            /* warm cream paper */
+    --ui-bg: #efedeb;            /* main app background */
+    --ui-ink: #322f2c;           /* espresso ink — primary text */
+    --ui-muted: #827c76;         /* secondary text */
+    --ui-surface: #f8f6f3;       /* elevated surface */
+    --ui-surface-soft: #f3f0ed;  /* subtle surface */
+    --ui-border: #d7d2cc;        /* form borders */
+    --ui-accent: #d88f6d;        /* terracotta — interactive */
+    --ui-accent-deep: #bb6d4c;   /* terracotta deep — primary CTA */
+    --ui-accent-soft: #f3e1d8;   /* terracotta blush — hover states */
+    --ui-rail: #3f3d3b;          /* dark rail / sidebar bg */
+    --ui-rail-soft: #4e4b48;     /* rail hover */
+    --ui-rail-text: #e8e2dc;     /* rail primary text */
+    --ui-rail-muted: #a09a94;    /* rail secondary text */
+    --ui-green: #5a8a6a;
+    --ui-green-soft: #daeede;
+    --ui-amber: #b5861f;
+    --ui-amber-soft: #f5e6c0;
+    --ui-red: #b95e48;
+    --ui-red-soft: #f5ddd8;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+ * DARK MODE — Paperforge Brand Identity System
+ * ──────────────────────────────────────────────────────────────────────────── */
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.145 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.145 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.396 0.141 25.723);
-    --destructive-foreground: oklch(0.637 0.237 25.331);
-    --border: oklch(0.269 0 0);
-    --input: oklch(0.269 0 0);
-    --ring: oklch(0.439 0 0);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.985 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(0.269 0 0);
-    --sidebar-ring: oklch(0.439 0 0);
+    /* ── ShadCN token bridge (dark) ─────────────────────────────────────── */
+    --background: #282726;       /* dark espresso bg */
+    --foreground: #f2eee8;       /* warm cream text */
+    --card: #2f2d2b;
+    --card-foreground: #f2eee8;
+    --popover: #2f2d2b;
+    --popover-foreground: #f2eee8;
+    --primary: #eca987;          /* terracotta light — dark mode primary */
+    --primary-foreground: #1e1c1a;
+    --secondary: #3a3835;
+    --secondary-foreground: #f2eee8;
+    --muted: #3a3835;
+    --muted-foreground: #aaa39c;
+    --accent: #4a3830;           /* deep terracotta accent in dark */
+    --accent-foreground: #f2eee8;
+    --destructive: #e07860;
+    --destructive-foreground: #1e1c1a;
+    --border: #4c4844;
+    --input: #4c4844;
+    --ring: #e09a77;
+
+    /* Chart tokens — dark editorial */
+    --chart-1: #e09a77;
+    --chart-2: #8aad9e;
+    --chart-3: #c4a882;
+    --chart-4: #b5956a;
+    --chart-5: #9e7a65;
+
+    /* Sidebar */
+    --sidebar: #1e1c1a;
+    --sidebar-foreground: #e8e2dc;
+    --sidebar-primary: #e09a77;
+    --sidebar-primary-foreground: #1e1c1a;
+    --sidebar-accent: #2a2826;
+    --sidebar-accent-foreground: #e8e2dc;
+    --sidebar-border: #3a3835;
+    --sidebar-ring: #e09a77;
+
+    /* ── Paperforge exclusive tokens (dark) ─────────────────────────────── */
+    --paper: #1e1c1a;
+    --ui-bg: #282726;
+    --ui-ink: #f2eee8;
+    --ui-muted: #aaa39c;
+    --ui-surface: #2f2d2b;
+    --ui-surface-soft: #3a3835;
+    --ui-border: #4c4844;
+    --ui-accent: #e09a77;
+    --ui-accent-deep: #eca987;
+    --ui-accent-soft: #4a3830;
+    --ui-rail: #1e1c1a;
+    --ui-rail-soft: #2a2826;
+    --ui-rail-text: #e8e2dc;
+    --ui-rail-muted: #7a736e;
+    --ui-green: #6dab80;
+    --ui-green-soft: #1e3326;
+    --ui-amber: #d4a83a;
+    --ui-amber-soft: #3a2e10;
+    --ui-red: #e07860;
+    --ui-red-soft: #3a1c18;
 }
 
 @layer base {
@@ -139,5 +257,15 @@
 
     body {
         @apply bg-background text-foreground;
+        font-family: var(--font-sans);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-serif);
+        letter-spacing: -0.03em;
+    }
+
+    code, pre, .font-mono {
+        font-family: var(--font-mono);
     }
 }

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import type { FileMetadata, WorkspaceTree } from '@/types/workspace';
 import {
+    BookOpen,
+    CaretDown,
+    CaretRight,
+    File,
     FileCode,
     FileText,
     Folder,
     FolderOpen,
+    Gear,
     Image,
     Plus,
-    Trash2,
-    File,
-    ChevronRight,
-    ChevronDown,
-    BookOpen,
-    Settings,
-} from 'lucide-react';
+    Trash,
+} from '@phosphor-icons/react';
 
 export interface FileTreeProps {
     projectId: string;
@@ -48,31 +48,31 @@ export const FileTree: React.FC<FileTreeProps> = ({
         if (node.isDir) {
             const isCollapsed = collapsedDirs[node.path];
             return isCollapsed ? (
-                <Folder className="h-4 w-4 text-amber-500 shrink-0" />
+                <Folder weight="duotone" className="h-4 w-4 text-amber-500 shrink-0" />
             ) : (
-                <FolderOpen className="h-4 w-4 text-amber-500 shrink-0" />
+                <FolderOpen weight="duotone" className="h-4 w-4 text-amber-500 shrink-0" />
             );
         }
 
         const ext = node.extension?.toLowerCase() || '';
 
         if (ext === 'tex') {
-            return <FileCode className="h-4 w-4 text-primary shrink-0" />;
+            return <FileCode weight="duotone" className="h-4 w-4 text-primary shrink-0" />;
         }
         if (ext === 'bib') {
-            return <BookOpen className="h-4 w-4 text-emerald-500 shrink-0" />;
+            return <BookOpen weight="duotone" className="h-4 w-4 text-emerald-500 shrink-0" />;
         }
         if (ext === 'sty' || ext === 'cls') {
-            return <Settings className="h-4 w-4 text-purple-500 shrink-0" />;
+            return <Gear weight="duotone" className="h-4 w-4 text-purple-500 shrink-0" />;
         }
         if (['png', 'jpg', 'jpeg', 'svg', 'webp'].includes(ext)) {
-            return <Image className="h-4 w-4 text-blue-500 shrink-0" />;
+            return <Image weight="duotone" className="h-4 w-4 text-blue-500 shrink-0" />;
         }
         if (ext === 'pdf') {
-            return <FileText className="h-4 w-4 text-red-500 shrink-0" />;
+            return <FileText weight="duotone" className="h-4 w-4 text-red-500 shrink-0" />;
         }
 
-        return <File className="h-4 w-4 text-muted-foreground shrink-0" />;
+        return <File weight="duotone" className="h-4 w-4 text-muted-foreground shrink-0" />;
     };
 
     const handleCreateFile = async (e: React.FormEvent) => {
@@ -213,9 +213,9 @@ export const FileTree: React.FC<FileTreeProps> = ({
                                 <div className="flex items-center gap-2 min-w-0 flex-1">
                                     {isDir ? (
                                         collapsedDirs[node.path] ? (
-                                            <ChevronRight className="h-3 w-3 text-muted-foreground shrink-0" />
+                                            <CaretRight className="h-3 w-3 text-muted-foreground shrink-0" />
                                         ) : (
-                                            <ChevronDown className="h-3 w-3 text-muted-foreground shrink-0" />
+                                            <CaretDown className="h-3 w-3 text-muted-foreground shrink-0" />
                                         )
                                     ) : null}
 
@@ -239,7 +239,7 @@ export const FileTree: React.FC<FileTreeProps> = ({
                                         className="opacity-0 group-hover:opacity-100 p-0.5 rounded hover:bg-destructive/20 text-muted-foreground hover:text-destructive transition-all"
                                         title="Delete File"
                                     >
-                                        <Trash2 className="h-3 w-3" />
+                                        <Trash className="h-3 w-3" />
                                     </button>
                                 )}
                             </div>

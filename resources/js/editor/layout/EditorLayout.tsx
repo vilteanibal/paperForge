@@ -3,7 +3,12 @@ import { useEditorStore } from '@/stores/useEditorStore';
 import { ModeToggle } from './ModeToggle';
 import { MonacoCodeEditor } from '../monaco/MonacoCodeEditor';
 import { VisualEditor } from '../visual/VisualEditor';
-import { Play, Save, CheckCircle2, AlertCircle } from 'lucide-react';
+import {
+    CheckCircle,
+    FloppyDisk,
+    Play,
+    WarningCircle,
+} from '@phosphor-icons/react';
 
 export interface EditorLayoutProps {
     onSave?: () => void;
@@ -45,11 +50,11 @@ export const EditorLayout: React.FC<EditorLayoutProps> = ({
                     </span>
                     {isDirty ? (
                         <span className="inline-flex items-center gap-1 text-[11px] text-amber-500 font-medium">
-                            <AlertCircle className="h-3 w-3" /> Unsaved
+                            <WarningCircle weight="duotone" className="h-3 w-3" /> Unsaved
                         </span>
                     ) : (
                         <span className="inline-flex items-center gap-1 text-[11px] text-emerald-500 font-medium">
-                            <CheckCircle2 className="h-3 w-3" /> Saved
+                            <CheckCircle weight="duotone" className="h-3 w-3" /> Saved
                         </span>
                     )}
                 </div>
@@ -67,7 +72,7 @@ export const EditorLayout: React.FC<EditorLayoutProps> = ({
                             onClick={onSave}
                             className="inline-flex items-center gap-1.5 rounded-md border bg-background px-3 py-1.5 text-xs font-medium hover:bg-muted transition-colors"
                         >
-                            <Save className="h-3.5 w-3.5" />
+                            <FloppyDisk className="h-3.5 w-3.5" />
                             Save
                         </button>
                     )}
@@ -79,7 +84,7 @@ export const EditorLayout: React.FC<EditorLayoutProps> = ({
                             disabled={isCompiling}
                             className="inline-flex items-center gap-1.5 rounded-md bg-primary text-primary-foreground px-3.5 py-1.5 text-xs font-medium shadow-xs hover:bg-primary/90 disabled:opacity-50 transition-colors"
                         >
-                            <Play className={`h-3.5 w-3.5 fill-current ${isCompiling ? 'animate-spin' : ''}`} />
+                            <Play weight="fill" className={`h-3.5 w-3.5 ${isCompiling ? 'animate-spin' : ''}`} />
                             {isCompiling ? 'Compiling...' : 'Recompile'}
                         </button>
                     )}

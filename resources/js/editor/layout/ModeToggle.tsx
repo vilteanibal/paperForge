@@ -1,6 +1,6 @@
 import React from 'react';
 import type { EditorMode } from '@/stores/useEditorStore';
-import { Code, Columns2, Eye } from 'lucide-react';
+import { Code, Columns, Eye } from '@phosphor-icons/react';
 
 export interface ModeToggleProps {
     mode: EditorMode;
@@ -34,7 +34,7 @@ export const ModeToggle: React.FC<ModeToggleProps> = ({ mode, onChange }) => {
                 }`}
                 title="Split Side-by-Side View"
             >
-                <Columns2 className="h-3.5 w-3.5" />
+                <Columns className="h-3.5 w-3.5" />
                 Split
             </button>
 

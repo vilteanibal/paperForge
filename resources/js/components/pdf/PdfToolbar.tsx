@@ -1,5 +1,12 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Maximize2, RotateCw } from 'lucide-react';
+import {
+    ArrowsClockwise,
+    ArrowsOut,
+    CaretLeft,
+    CaretRight,
+    MagnifyingGlassMinus,
+    MagnifyingGlassPlus,
+} from '@phosphor-icons/react';
 
 export interface PdfToolbarProps {
     currentPage: number;
@@ -37,7 +44,7 @@ export const PdfToolbar: React.FC<PdfToolbarProps> = ({
                     className="p-1 rounded hover:bg-muted disabled:opacity-40 transition-colors"
                     title="Previous Page"
                 >
-                    <ChevronLeft className="h-4 w-4" />
+                    <CaretLeft className="h-4 w-4" />
                 </button>
 
                 <span className="font-mono text-[11px] px-1 text-muted-foreground">
@@ -51,7 +58,7 @@ export const PdfToolbar: React.FC<PdfToolbarProps> = ({
                     className="p-1 rounded hover:bg-muted disabled:opacity-40 transition-colors"
                     title="Next Page"
                 >
-                    <ChevronRight className="h-4 w-4" />
+                    <CaretRight className="h-4 w-4" />
                 </button>
             </div>
 
@@ -64,7 +71,7 @@ export const PdfToolbar: React.FC<PdfToolbarProps> = ({
                     className="p-1 rounded hover:bg-muted disabled:opacity-40 transition-colors"
                     title="Zoom Out"
                 >
-                    <ZoomOut className="h-3.5 w-3.5" />
+                    <MagnifyingGlassMinus className="h-3.5 w-3.5" />
                 </button>
 
                 <span className="font-mono text-[11px] w-10 text-center text-muted-foreground">
@@ -78,7 +85,7 @@ export const PdfToolbar: React.FC<PdfToolbarProps> = ({
                     className="p-1 rounded hover:bg-muted disabled:opacity-40 transition-colors"
                     title="Zoom In"
                 >
-                    <ZoomIn className="h-3.5 w-3.5" />
+                    <MagnifyingGlassPlus className="h-3.5 w-3.5" />
                 </button>
 
                 <button
@@ -87,7 +94,7 @@ export const PdfToolbar: React.FC<PdfToolbarProps> = ({
                     className="p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors ml-1"
                     title="Fit Width"
                 >
-                    <Maximize2 className="h-3.5 w-3.5" />
+                    <ArrowsOut className="h-3.5 w-3.5" />
                 </button>
 
                 {onReload && (
@@ -98,7 +105,7 @@ export const PdfToolbar: React.FC<PdfToolbarProps> = ({
                         className="p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground disabled:opacity-50 transition-colors ml-1"
                         title="Reload PDF"
                     >
-                        <RotateCw className={`h-3.5 w-3.5 ${isCompiling ? 'animate-spin' : ''}`} />
+                        <ArrowsClockwise className={`h-3.5 w-3.5 ${isCompiling ? 'animate-spin' : ''}`} />
                     </button>
                 )}
             </div>

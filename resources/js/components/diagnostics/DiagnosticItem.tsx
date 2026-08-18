@@ -1,6 +1,6 @@
 import React from 'react';
 import type { LaTeXDiagnostic } from '@/types/compiler';
-import { AlertCircle, AlertTriangle, Info } from 'lucide-react';
+import { Info, Warning, WarningCircle } from '@phosphor-icons/react';
 
 export interface DiagnosticItemProps {
     diagnostic: LaTeXDiagnostic;
@@ -15,19 +15,19 @@ export const DiagnosticItem: React.FC<DiagnosticItemProps> = React.memo(({ diagn
             case 'error':
                 return (
                     <span className="inline-flex items-center gap-1 text-destructive bg-destructive/10 border border-destructive/20 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase">
-                        <AlertCircle className="h-3 w-3" /> Error
+                        <WarningCircle weight="duotone" className="h-3 w-3" /> Error
                     </span>
                 );
             case 'warning':
                 return (
                     <span className="inline-flex items-center gap-1 text-amber-500 bg-amber-500/10 border border-amber-500/20 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase">
-                        <AlertTriangle className="h-3 w-3" /> Warning
+                        <Warning weight="duotone" className="h-3 w-3" /> Warning
                     </span>
                 );
             case 'badbox':
                 return (
                     <span className="inline-flex items-center gap-1 text-blue-500 bg-blue-500/10 border border-blue-500/20 rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase">
-                        <Info className="h-3 w-3" /> Badbox
+                        <Info weight="duotone" className="h-3 w-3" /> Badbox
                     </span>
                 );
             default:

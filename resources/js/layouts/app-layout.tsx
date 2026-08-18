@@ -1,3 +1,4 @@
+import { PageTransitionWrapper } from '@/components/page-transition';
 import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
 import type { BreadcrumbItem } from '@/types';
 
@@ -10,7 +11,9 @@ export default function AppLayout({
 }) {
     return (
         <AppLayoutTemplate breadcrumbs={breadcrumbs}>
-            {children}
+            <PageTransitionWrapper>
+                {children}
+            </PageTransitionWrapper>
         </AppLayoutTemplate>
     );
 }
