@@ -1,0 +1,50 @@
+# .antigravityrules — RAALD Guard v2 CRITICAL
+# Sistema: paperForge
+# Generado por: Arq. VCA-PRDs × Antigravity
+
+## IDENTIDAD DEL AGENTE
+Eres un agente de desarrollo Laravel 13 y React/TypeScript operando bajo RAALD v2 CRITICAL.
+Tu objetivo primordial es construir un parser AST hiper-rápido en TS y un backend PHP seguro contra RCE.
+Consulta AGENTS.md y este archivo antes de ejecutar tareas.
+
+## REGLAS DE ARQUITECTURA PHP (IRROMPIBLES)
+
+### Capa de Controllers y Requests
+- NUNCA leer o escribir archivos directamente en el Controller. Usar `VirtualWorkspaceManager`.
+- Todo Form Request que maneje strings de ruta debe incluir un regex estricto: `prohibido contener '../' o iniciar con '/' absoluto`.
+- Las rutas del disco del host NO deben viajar al frontend; exponer rutas relativas al ID del proyecto (ej: `/chapters/intro.tex`).
+
+### Capa de Services / Actions (Seguridad)
+- `VirtualWorkspaceManager`: Usar `realpath()` para resolver todas las peticiones de archivo y verificar con `str_starts_with($resolved, $projectStoragePath)` ANTES de cualquier operación (File Read/Write). Lanzar `PathOutOfBoundsException` si falla.
+- `TexLiveOrchestrator`:
+  - Ejecutar proceso aislado usando `Process` component.
+  - Argumentos obligatorios inyectados: `-no-shell-escape`, `-interaction=nonstopmode`, `-halt-on-error`.
+  - Establecer timeout de proceso (ej: 60 segundos) para evitar loops infinitos del compilador.
+
+### Base de Datos
+- Usamos SQLite local exclusivamente.
+- Sin soft-deletes necesarios, ya que el borrado de proyectos elimina el directorio físico por completo.
+
+## REGLAS DE ARQUITECTURA FRONTEND (REACT / TS)
+
+### AST Parser y Estado
+- Desarrollar el parser TypeScript asumiendo que el usuario pegará comandos que NO conocemos.
+- La estructura AST debe tener un tipo de nodo `UnknownBlock` que retenga el código original en formato string para que al re-serializar a `.tex`, se escriba intacto.
+- Manejo de estado con Zustand: Desacoplar las mutaciones visuales de la serialización pesada para no bloquear el thread principal (mantener UI reactiva < 200ms).
+
+### Editor Visual
+- Usar Monaco Editor como motor base para la vista de código.
+- En modo dividido, mantener una tabla de mapeo de líneas (Line Mapping) entre los nodos AST visuales y las líneas en Monaco para sincronización de scroll.
+
+## REGLAS DE TESTING (ESTRICTAS)
+
+- Frontend (Vitest): Proveer snapshots del AST. Pasar de LaTeX -> AST -> LaTeX y verificar vía test que el string resultante sea idéntico al input.
+- Backend (Pest PHP): Escribir al menos 5 tests comprobando intentos de Path Traversal (`../../etc/passwd`, symlinks maliciosos, null bytes). Todos deben arrojar Exception.
+
+## PROTOCOLO DE EJECUCIÓN DEL AGENTE
+1. Leer AGENTS.md, .antigravityrules y SECURITY_INVARIANTS.md COMPLETOS.
+2. Identificar componente a intervenir (AST Parser TS vs Workspace PHP).
+3. Escribir test (Vitest para AST, Pest para PHP) definiendo la restricción.
+4. Desarrollar la lógica. Si implica I/O o procesos de SO, parar y revisar sandboxing.
+5. Ejecutar suite de pruebas respectiva.
+6. Reportar cambios.
